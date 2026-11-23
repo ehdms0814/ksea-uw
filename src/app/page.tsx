@@ -6,6 +6,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Calendar,
+  Camera,
   Compass,
   FlaskConical,
   MapPin,
@@ -85,13 +86,15 @@ export default function HomePage() {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link
-                href="/join"
+              <a
+                href={SITE_INFO.membershipFormUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-bold text-husky-night shadow-lg transition-all hover:bg-gold-bright focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-bright"
               >
-                <span>{locale === "en" ? "Join KSEA UW" : "KSEA UW 가입하기"}</span>
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+                <span>{locale === "en" ? "Become a Member" : "멤버 가입하기"}</span>
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
               <Link
                 href="/events"
                 className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
@@ -333,31 +336,62 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredPhotos.map((photo) => (
-            <Link
-              key={photo.id}
-              href="/gallery"
-              className="scroll-reveal group relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-border bg-husky-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-husky"
-            >
-              <img
-                src={photo.src}
-                alt={t(photo.alt)}
-                loading="lazy"
-                width={520}
-                height={390}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-husky-night/85 via-husky-night/15 to-transparent" />
-              <div className="absolute bottom-3.5 left-3.5 right-3.5">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-gold-bright">
-                  {t(photo.quarter)}
-                </p>
-                <p className="mt-0.5 text-sm font-bold text-white">{t(photo.title)}</p>
+        {featuredPhotos.length === 0 ? (
+          <div className="mt-10 flex flex-col items-center justify-between gap-6 rounded-2xl border border-dashed border-stone-border bg-surface p-8 text-center sm:flex-row sm:text-left">
+            <div className="flex flex-col items-center gap-4 sm:flex-row">
+              <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-husky/10 text-husky">
+                <Camera className="h-6 w-6" aria-hidden="true" />
               </div>
-            </Link>
-          ))}
-        </div>
+              <div>
+                <h3 className="text-base font-bold text-ink">
+                  {locale === "en"
+                    ? "Photo Gallery Coming Soon"
+                    : "포토 갤러리가 아직 비어 있습니다"}
+                </h3>
+                <p className="mt-1 text-sm text-ink-secondary">
+                  {locale === "en"
+                    ? "2026–2027 event photos will be uploaded here soon. Follow @ksea.uw for live updates!"
+                    : "2026–2027 행사 사진이 곧 업로드될 예정입니다. 최신 소식은 @ksea.uw 인스타그램에서 확인하세요!"}
+                </p>
+              </div>
+            </div>
+            <a
+              href={SITE_INFO.socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-husky/10 px-4 py-2 text-xs font-semibold text-husky transition-colors hover:bg-husky hover:text-white"
+            >
+              <span>Instagram (@ksea.uw)</span>
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          </div>
+        ) : (
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredPhotos.map((photo) => (
+              <Link
+                key={photo.id}
+                href="/gallery"
+                className="scroll-reveal group relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-border bg-husky-night focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-husky"
+              >
+                <img
+                  src={photo.src}
+                  alt={t(photo.alt)}
+                  loading="lazy"
+                  width={520}
+                  height={390}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-husky-night/85 via-husky-night/15 to-transparent" />
+                <div className="absolute bottom-3.5 left-3.5 right-3.5">
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-gold-bright">
+                    {t(photo.quarter)}
+                  </p>
+                  <p className="mt-0.5 text-sm font-bold text-white">{t(photo.title)}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* BOTTOM JOIN CTA BANNER */}
@@ -380,18 +414,20 @@ export default function HomePage() {
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">
                 {locale === "en"
-                  ? "Join our mailing list and Discord to receive early access to Seattle tech coffee chats, undergraduate research workshops, and KSEA scholarship opportunities."
-                  : "멤버로 가입하시면 시애틀 현직자 커피챗, 학부 연구실(URP) 세미나, 해커톤, 그리고 KSEA 장학금 공지를 가장 먼저 받아보실 수 있습니다."}
+                  ? "Sign up through our official membership form to receive early access to Seattle tech seminars, company tours, coffee chats, and KSEA scholarship opportunities."
+                  : "공식 멤버십 폼으로 가입하시면 세미나, 대기업 투어, 현직자 커피챗, 그리고 KSEA 장학금 공지를 가장 먼저 받아보실 수 있습니다."}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/join"
+              <a
+                href={SITE_INFO.membershipFormUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-bold text-husky-night transition-colors hover:bg-gold-bright"
               >
                 <span>{locale === "en" ? "Become a Member" : "멤버 가입 신청"}</span>
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>

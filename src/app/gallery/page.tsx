@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
-import { ChevronLeft, ChevronRight, Handshake, Mail, ZoomIn } from "lucide-react";
+import {
+  ArrowUpRight,
+  Camera,
+  ChevronLeft,
+  ChevronRight,
+  Handshake,
+  Mail,
+  ZoomIn,
+} from "lucide-react";
 import {
   GALLERY_CATEGORIES,
   GALLERY_ITEMS,
@@ -88,68 +96,101 @@ export default function GalleryPage() {
             </h2>
           </div>
 
-          <div
-            role="group"
-            aria-label={locale === "en" ? "Filter gallery photos" : "갤러리 카테고리 필터"}
-            className="flex flex-wrap gap-2"
-          >
-            {GALLERY_CATEGORIES.map((category) => {
-              const selected = activeCategory === category.id;
-              return (
-                <button
-                  key={category.id}
-                  type="button"
-                  onClick={() => {
-                    setActiveCategory(category.id);
-                    setSelectedIndex(null);
-                  }}
-                  aria-pressed={selected}
-                  className={
-                    selected
-                      ? "rounded-full bg-husky px-4 py-2 text-xs font-semibold text-white transition-colors"
-                      : "rounded-full border border-stone-border bg-surface px-4 py-2 text-xs font-medium text-ink-secondary transition-colors hover:border-husky/40 hover:text-ink"
-                  }
-                >
-                  {t(category.label)}
-                </button>
-              );
-            })}
-          </div>
+          {GALLERY_ITEMS.length > 0 && (
+            <div
+              role="group"
+              aria-label={locale === "en" ? "Filter gallery photos" : "갤러리 카테고리 필터"}
+              className="flex flex-wrap gap-2"
+            >
+              {GALLERY_CATEGORIES.map((category) => {
+                const selected = activeCategory === category.id;
+                return (
+                  <button
+                    key={category.id}
+                    type="button"
+                    onClick={() => {
+                      setActiveCategory(category.id);
+                      setSelectedIndex(null);
+                    }}
+                    aria-pressed={selected}
+                    className={
+                      selected
+                        ? "rounded-full bg-husky px-4 py-2 text-xs font-semibold text-white transition-colors"
+                        : "rounded-full border border-stone-border bg-surface px-4 py-2 text-xs font-medium text-ink-secondary transition-colors hover:border-husky/40 hover:text-ink"
+                    }
+                  >
+                    {t(category.label)}
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleItems.map((item, idx) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setSelectedIndex(idx)}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-border bg-surface text-left shadow-xs transition-all hover:-translate-y-0.5 hover:border-husky/35 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-husky"
+        {visibleItems.length === 0 ? (
+          <div className="mt-10 flex flex-col items-center justify-center rounded-3xl border border-dashed border-stone-border bg-surface px-6 py-16 text-center shadow-xs">
+            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-husky/10 text-husky">
+              <Camera className="h-7 w-7" aria-hidden="true" />
+            </div>
+            <h3 className="mt-5 text-xl font-bold text-ink">
+              {locale === "en"
+                ? "Photo Gallery Coming Soon"
+                : "포토 갤러리가 아직 비어 있습니다"}
+            </h3>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-secondary">
+              {locale === "en"
+                ? "No photos have been uploaded yet. Highlights from our 2026–2027 seminars, company tours, and community events will be shared here soon!"
+                : "아직 업로드된 활동 사진이 없습니다. 2026–2027 세미나, 기업 투어, 네트워킹 행사 사진이 곧 이곳에 업데이트될 예정입니다."}
+            </p>
+            <a
+              href={SITE_INFO.socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-husky px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-husky-deep"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-husky-night">
-                <img
-                  src={item.src}
-                  alt={t(item.alt)}
-                  loading="lazy"
-                  width={640}
-                  height={400}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-husky-night/70 text-white opacity-0 backdrop-blur-xs transition-opacity group-hover:opacity-100">
-                  <ZoomIn className="h-4 w-4" aria-hidden="true" />
+              <span>
+                {locale === "en"
+                  ? "Follow @ksea.uw on Instagram"
+                  : "인스타그램 @ksea.uw 소식 보기"}
+              </span>
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        ) : (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {visibleItems.map((item, idx) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setSelectedIndex(idx)}
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-border bg-surface text-left shadow-xs transition-all hover:-translate-y-0.5 hover:border-husky/35 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-husky"
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-husky-night">
+                  <img
+                    src={item.src}
+                    alt={t(item.alt)}
+                    loading="lazy"
+                    width={640}
+                    height={400}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-husky-night/70 text-white opacity-0 backdrop-blur-xs transition-opacity group-hover:opacity-100">
+                    <ZoomIn className="h-4 w-4" aria-hidden="true" />
+                  </div>
                 </div>
-              </div>
-              <div className="p-5">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-gold-deep">
-                  {t(item.quarter)}
-                </p>
-                <h3 className="mt-1 text-base font-bold text-ink">{t(item.title)}</h3>
-                <p className="mt-1.5 line-clamp-2 text-sm text-ink-secondary">
-                  {t(item.caption)}
-                </p>
-              </div>
-            </button>
-          ))}
-        </div>
+                <div className="p-5">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-gold-deep">
+                    {t(item.quarter)}
+                  </p>
+                  <h3 className="mt-1 text-base font-bold text-ink">{t(item.title)}</h3>
+                  <p className="mt-1.5 line-clamp-2 text-sm text-ink-secondary">
+                    {t(item.caption)}
+                  </p>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* SPONSORS & PARTNERS */}

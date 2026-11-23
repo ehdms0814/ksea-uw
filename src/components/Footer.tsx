@@ -100,7 +100,7 @@ export function Footer() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
                 >
-                  <span>Instagram (@ksea_uw)</span>
+                  <span>Instagram (@ksea.uw)</span>
                   <ArrowUpRight className="h-3.5 w-3.5 text-gold-bright" aria-hidden="true" />
                 </a>
               </li>

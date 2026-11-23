@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { ArrowRight, ExternalLink, Mail } from "lucide-react";
 import { TIMELINE_MILESTONES, SITE_INFO } from "@/data/site";
 import {
@@ -267,27 +266,29 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* Recruitment Callout */}
+        {/* Membership Callout */}
         <div className="mt-14 flex flex-col items-start justify-between gap-6 rounded-2xl border border-stone-border bg-subtle p-8 sm:flex-row sm:items-center">
           <div>
             <h3 className="text-lg font-bold text-ink">
               {locale === "en"
-                ? "Interested in joining the officer board?"
-                : "KSEA UW 임원진·위원회 활동에 관심이 있으신가요?"}
+                ? "Want to become a KSEA UW member?"
+                : "KSEA UW 멤버로 함께하고 싶으신가요?"}
             </h3>
             <p className="mt-1 text-sm text-ink-secondary">
               {locale === "en"
-                ? `We welcome committee interns every Autumn and Spring quarter. Reach out via ${SITE_INFO.email} or check the officer track on our join form.`
-                : `매년 가을·봄 학기 운영 위원회 인턴을 모집합니다. ${SITE_INFO.email}로 문의하시거나 가입 신청서에서 임원진 트랙을 선택해 주세요.`}
+                ? `Sign up through our official membership form to stay connected for 2026–2027 seminars, company tours, and coffee chats, or email ${SITE_INFO.email}.`
+                : `공식 멤버십 가입 폼을 작성하시면 2026–2027 세미나, 기업 투어, 커피챗 소식을 받아보실 수 있습니다. 문의: ${SITE_INFO.email}`}
             </p>
           </div>
-          <Link
-            href="/join"
+          <a
+            href={SITE_INFO.membershipFormUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-husky px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-husky-deep"
           >
-            <span>{locale === "en" ? "Apply / Connect" : "지원 및 가입 안내"}</span>
+            <span>{locale === "en" ? "Become a Member" : "멤버 가입하기"}</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </a>
         </div>
       </section>
     </div>

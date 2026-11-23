@@ -20,13 +20,15 @@ export const SITE_INFO = {
     ko: "워싱턴대학교 YG 챕터 · 시애틀",
   },
   coordinates: "47.6553° N, 122.3035° W · SEATTLE, WA",
-  email: "kseauw@uw.edu",
+  email: "ksea.uw@gmail.com",
+  membershipFormUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLSfzmbd8xMVbXkMOMvtY8m_8XNUxjOPKgCnR6CNJYpJhDcxH3A/viewform?usp=send_form",
   location: {
     en: "University of Washington, Seattle Campus",
     ko: "워싱턴대학교 시애틀 캠퍼스 (UW Seattle)",
   },
   socials: {
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/ksea.uw/",
     linkedin: "https://linkedin.com",
     kseaNational: "https://www.ksea.org",
     kseaSeattle: "https://seattle.ksea.org",
@@ -171,16 +173,6 @@ export const FAQS = [
     answer: {
       en: "Joining the KSEA UW campus chapter is completely free for all UW students. Official KSEA National YG membership is optional (free for undergraduate students under current KSEA promotions, small annual fee for grad students) and unlocks national scholarships and conference travel grants.",
       ko: "KSEA UW 교내 챕터 일반 멤버 가입은 전액 무료입니다. 선택 사항인 KSEA 본부 YG 정회원 등록 시(학부생 프로모션 무료 / 대학원생 소액 연회비) 전국 장학금 및 UKC/NWRC 학회 지원 혜택을 받을 수 있습니다.",
-    },
-  },
-  {
-    question: {
-      en: "How can I apply to become an officer or committee member?",
-      ko: "임원진이나 운영 위원회(Committee)에 지원하는 방법은 무엇인가요?",
-    },
-    answer: {
-      en: "We recruit committee interns every Autumn and Spring quarter across Events, External Relations, Tech & Web, and Design/Media. Check the 'Interested in Officer/Committee Track' box on the Join form to receive our next recruitment packet.",
-      ko: "매년 가을·봄 학기에 행사 기획, 대외협력, 테크·웹, 디자인·미디어 팀 인턴 및 임원진을 모집합니다. 가입 신청서에서 '임원진/위원회 활동 관심' 항목을 체크해 주시면 모집 안내를 가장 먼저 보내드립니다.",
     },
   },
 ] as const;
