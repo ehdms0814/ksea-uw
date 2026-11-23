@@ -19,6 +19,7 @@ import {
 import { SITE_INFO } from "@/data/site";
 import { useLanguage } from "@/context/LanguageContext";
 import { ModalDialog } from "@/components/ModalDialog";
+import { SponsorBanner } from "@/components/SponsorBanner";
 
 export default function GalleryPage() {
   const { locale, t } = useLanguage();
@@ -83,6 +84,9 @@ export default function GalleryPage() {
           </p>
         </div>
       </section>
+
+      {/* OFFICIAL SPONSOR STRIP */}
+      <SponsorBanner variant="strip" />
 
       {/* PHOTO GALLERY */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
@@ -211,25 +215,60 @@ export default function GalleryPage() {
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {PARTNERS.map((partner) => (
-              <div
-                key={partner.id}
-                className="flex items-start gap-5 rounded-2xl border border-stone-border bg-surface p-6 shadow-xs"
-              >
-                <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold/40 bg-husky-night font-mono text-xs font-bold tracking-wider text-gold-bright"
-                  aria-hidden="true"
+            {PARTNERS.map((partner) => {
+              const cardInner = (
+                <>
+                  <div
+                    className={
+                      partner.tier === "sponsor"
+                        ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold bg-[#24135f] font-mono text-xs font-bold tracking-wider text-gold-bright"
+                        : "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold/40 bg-husky-night font-mono text-xs font-bold tracking-wider text-gold-bright"
+                    }
+                    aria-hidden="true"
+                  >
+                    {partner.monogram}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="text-base font-bold text-ink">{partner.name}</h3>
+                      {partner.tier === "sponsor" && (
+                        <span className="rounded-full bg-gold/25 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-husky-deep">
+                          {locale === "en" ? "Official Sponsor" : "공식 후원사"}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1.5 text-sm leading-relaxed text-ink-secondary">
+                      {t(partner.description)}
+                    </p>
+                    {partner.url && (
+                      <span className="mt-2.5 inline-flex items-center gap-1 text-xs font-semibold text-husky group-hover:underline">
+                        <span>{locale === "en" ? "Visit website" : "웹사이트 방문"}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      </span>
+                    )}
+                  </div>
+                </>
+              );
+
+              return partner.url ? (
+                <a
+                  key={partner.id}
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-5 rounded-2xl border border-husky/30 bg-surface p-6 shadow-xs transition-all hover:-translate-y-0.5 hover:border-husky hover:shadow-md"
                 >
-                  {partner.monogram}
+                  {cardInner}
+                </a>
+              ) : (
+                <div
+                  key={partner.id}
+                  className="flex items-start gap-5 rounded-2xl border border-stone-border bg-surface p-6 shadow-xs"
+                >
+                  {cardInner}
                 </div>
-                <div>
-                  <h3 className="text-base font-bold text-ink">{partner.name}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-secondary">
-                    {t(partner.description)}
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Become a Sponsor Callout */}

@@ -36,6 +36,27 @@ export const SITE_INFO = {
   },
 } as const;
 
+export const OFFICIAL_SPONSOR = {
+  name: "Extreme Networks",
+  url: "https://www.extremenetworks.com/",
+  badge: {
+    en: "Official Sponsor",
+    ko: "공식 후원사",
+  },
+  headline: {
+    en: "Proudly Sponsored by Extreme Networks",
+    ko: "KSEA UW 공식 후원사 · Extreme Networks",
+  },
+  description: {
+    en: "A global leader in cloud-driven AI networking solutions—powering KSEA UW's 2026–2027 STEM seminars, career programs, and student community.",
+    ko: "클라우드 기반 AI 네트워킹 글로벌 선도 기업 Extreme Networks가 KSEA UW의 2026–2027 세미나, 커리어 프로그램 및 학생 활동을 공식 후원합니다.",
+  },
+  cta: {
+    en: "Visit Extreme Networks",
+    ko: "Extreme Networks 웹사이트 방문",
+  },
+} as const;
+
 export const NAV_ITEMS = [
   { href: "/", label: { en: "Home", ko: "홈" } },
   { href: "/about", label: { en: "About & Officers", ko: "소개 · 임원진" } },

@@ -12,6 +12,7 @@ import {
 } from "@/data/events";
 import { useLanguage } from "@/context/LanguageContext";
 import { EventDetailModal } from "@/components/EventDetailModal";
+import { SponsorBanner } from "@/components/SponsorBanner";
 
 const CATEGORY_BADGE_STYLES: Record<EventCategory, string> = {
   seminar: "bg-husky/10 text-husky",
@@ -78,6 +79,9 @@ export default function EventsPage() {
           </p>
         </div>
       </section>
+
+      {/* OFFICIAL SPONSOR STRIP */}
+      <SponsorBanner variant="strip" />
 
       {/* FILTER BAR */}
       <section className="border-b border-stone-border bg-surface">

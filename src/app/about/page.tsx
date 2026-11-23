@@ -11,6 +11,7 @@ import {
   type Officer,
 } from "@/data/officers";
 import { useLanguage } from "@/context/LanguageContext";
+import { SponsorBanner } from "@/components/SponsorBanner";
 
 export default function AboutPage() {
   const { locale, t } = useLanguage();
@@ -124,6 +125,9 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+
+      {/* OFFICIAL SPONSOR STRIP */}
+      <SponsorBanner variant="strip" />
 
       {/* MISSION & VISION */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">

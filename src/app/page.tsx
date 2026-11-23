@@ -18,6 +18,7 @@ import { EVENTS, QUARTERS, type ClubEvent } from "@/data/events";
 import { GALLERY_ITEMS } from "@/data/gallery";
 import { useLanguage } from "@/context/LanguageContext";
 import { EventDetailModal } from "@/components/EventDetailModal";
+import { SponsorBanner } from "@/components/SponsorBanner";
 
 const PILLAR_ICONS = {
   career: Compass,
@@ -134,8 +135,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* OFFICIAL SPONSOR BANNER (Featured above Core Pillars) */}
+      <SponsorBanner variant="featured" />
+
       {/* THREE CORE PILLARS */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-gold-deep">

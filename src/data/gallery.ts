@@ -15,9 +15,10 @@ export interface GalleryItem {
 export interface PartnerItem {
   id: string;
   name: string;
-  tier: "parent" | "campus" | "industry";
+  tier: "sponsor" | "parent" | "campus" | "industry";
   description: LocalizedText;
   monogram: string;
+  url?: string;
 }
 
 export const GALLERY_CATEGORIES: { id: "all" | GalleryCategory; label: LocalizedText }[] = [
@@ -43,6 +44,17 @@ export const GALLERY_CATEGORIES: { id: "all" | GalleryCategory; label: Localized
 export const GALLERY_ITEMS: GalleryItem[] = [];
 
 export const PARTNERS: PartnerItem[] = [
+  {
+    id: "extreme-networks",
+    name: "Extreme Networks",
+    tier: "sponsor",
+    monogram: "EXT",
+    url: "https://www.extremenetworks.com/",
+    description: {
+      en: "Official corporate sponsor of KSEA UW—global leader in cloud-driven AI networking solutions supporting our 2026–2027 student programs.",
+      ko: "KSEA UW 공식 기업 후원사로, 클라우드 기반 AI 네트워킹 글로벌 선도 기업으로서 2026–2027 학생 활동을 후원합니다.",
+    },
+  },
   {
     id: "ksea-hq",
     name: "KSEA National Headquarters",

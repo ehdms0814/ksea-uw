@@ -3,6 +3,7 @@
 import { ArrowUpRight, Award, CheckCircle2, ChevronDown, Mail, Users } from "lucide-react";
 import { FAQS, SITE_INFO } from "@/data/site";
 import { useLanguage } from "@/context/LanguageContext";
+import { SponsorBanner } from "@/components/SponsorBanner";
 
 export default function JoinPage() {
   const { locale, t } = useLanguage();
@@ -49,6 +50,9 @@ export default function JoinPage() {
           </div>
         </div>
       </section>
+
+      {/* OFFICIAL SPONSOR STRIP */}
+      <SponsorBanner variant="strip" />
 
       {/* MEMBERSHIP TRACKS */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
