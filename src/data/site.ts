@@ -36,26 +36,68 @@ export const SITE_INFO = {
   },
 } as const;
 
-export const OFFICIAL_SPONSOR = {
-  name: "Extreme Networks",
-  url: "https://www.extremenetworks.com/",
-  badge: {
-    en: "Official Sponsor",
-    ko: "공식 후원사",
+export interface OfficialSponsor {
+  id: "extreme-networks" | "alt";
+  name: string;
+  url: string;
+  domainLabel: string;
+  tagline: LocalizedText;
+  description: LocalizedText;
+  cta: LocalizedText;
+  logoLight: string;
+  logoDark: string;
+  logoWidth: number;
+  logoHeight: number;
+  showWordmarkNextToLogo?: boolean;
+}
+
+export const OFFICIAL_SPONSORS: OfficialSponsor[] = [
+  {
+    id: "extreme-networks",
+    name: "Extreme Networks",
+    url: "https://www.extremenetworks.com/",
+    domainLabel: "extremenetworks.com",
+    tagline: {
+      en: "Cloud-Driven AI Networking",
+      ko: "클라우드 기반 AI 네트워킹",
+    },
+    description: {
+      en: "Global leader in cloud-driven AI networking solutions—powering KSEA UW's 2026–2027 STEM seminars, career programs, and student community.",
+      ko: "클라우드 기반 AI 네트워킹 글로벌 선도 기업 Extreme Networks가 KSEA UW의 2026–2027 세미나, 커리어 프로그램 및 학생 활동을 공식 후원합니다.",
+    },
+    cta: {
+      en: "Visit Extreme Networks",
+      ko: "Extreme Networks 방문",
+    },
+    logoLight: "/images/extreme-networks-purple.png",
+    logoDark: "/images/extreme-networks-white.png",
+    logoWidth: 732,
+    logoHeight: 193,
   },
-  headline: {
-    en: "Proudly Sponsored by Extreme Networks",
-    ko: "KSEA UW 공식 후원사 · Extreme Networks",
+  {
+    id: "alt",
+    name: "Alt",
+    url: "https://altalt.io/en/",
+    domainLabel: "altalt.io",
+    tagline: {
+      en: "Privacy-First On-Device AI Notes",
+      ko: "온디바이스 AI 강의·미팅 노트",
+    },
+    description: {
+      en: "Local, privacy-first AI transcription and note-taking for university lectures, meetings, and research—supporting UW STEM students with smarter study workflows.",
+      ko: "대학 강의와 미팅을 기기 내에서 안전하게 실시간 받아쓰기·요약해 주는 온디바이스 AI 노트 앱 Alt가 KSEA UW 학생들의 학업을 공식 후원합니다.",
+    },
+    cta: {
+      en: "Visit Alt",
+      ko: "Alt 웹사이트 방문",
+    },
+    logoLight: "/images/alt-logo.png",
+    logoDark: "/images/alt-logo.png",
+    logoWidth: 276,
+    logoHeight: 275,
+    showWordmarkNextToLogo: true,
   },
-  description: {
-    en: "A global leader in cloud-driven AI networking solutions—powering KSEA UW's 2026–2027 STEM seminars, career programs, and student community.",
-    ko: "클라우드 기반 AI 네트워킹 글로벌 선도 기업 Extreme Networks가 KSEA UW의 2026–2027 세미나, 커리어 프로그램 및 학생 활동을 공식 후원합니다.",
-  },
-  cta: {
-    en: "Visit Extreme Networks",
-    ko: "Extreme Networks 웹사이트 방문",
-  },
-} as const;
+];
 
 export const NAV_ITEMS = [
   { href: "/", label: { en: "Home", ko: "홈" } },

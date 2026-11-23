@@ -220,9 +220,11 @@ export default function GalleryPage() {
                 <>
                   <div
                     className={
-                      partner.tier === "sponsor"
-                        ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold bg-[#3b1599] p-2.5 font-mono text-xs font-bold tracking-wider text-gold-bright"
-                        : "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold/40 bg-husky-night font-mono text-xs font-bold tracking-wider text-gold-bright"
+                      partner.id === "alt"
+                        ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-stone-border bg-[#f4f4f2] p-2 font-mono text-xs font-bold tracking-wider text-ink"
+                        : partner.tier === "sponsor"
+                          ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold bg-[#3b1599] p-2.5 font-mono text-xs font-bold tracking-wider text-gold-bright"
+                          : "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold/40 bg-husky-night font-mono text-xs font-bold tracking-wider text-gold-bright"
                     }
                     aria-hidden="true"
                   >

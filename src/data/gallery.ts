@@ -58,6 +58,18 @@ export const PARTNERS: PartnerItem[] = [
     },
   },
   {
+    id: "alt",
+    name: "Alt",
+    tier: "sponsor",
+    monogram: "ALT",
+    logoSrc: "/images/alt-logo.png",
+    url: "https://altalt.io/en/",
+    description: {
+      en: "Official sponsor of KSEA UW—privacy-first on-device AI transcription and smart note-taking app empowering university lectures and research.",
+      ko: "KSEA UW 공식 후원사로, 기기 내에서 안전하게 강의와 미팅을 실시간 받아쓰기·요약해 주는 온디바이스 AI 노트 앱을 제공합니다.",
+    },
+  },
+  {
     id: "ksea-hq",
     name: "KSEA National Headquarters",
     tier: "parent",
