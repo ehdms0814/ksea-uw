@@ -221,12 +221,23 @@ export default function GalleryPage() {
                   <div
                     className={
                       partner.tier === "sponsor"
-                        ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold bg-[#24135f] font-mono text-xs font-bold tracking-wider text-gold-bright"
+                        ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold bg-[#3b1599] p-2.5 font-mono text-xs font-bold tracking-wider text-gold-bright"
                         : "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-gold/40 bg-husky-night font-mono text-xs font-bold tracking-wider text-gold-bright"
                     }
                     aria-hidden="true"
                   >
-                    {partner.monogram}
+                    {partner.logoSrc ? (
+                      <img
+                        src={partner.logoSrc}
+                        alt=""
+                        loading="lazy"
+                        width={148}
+                        height={159}
+                        className="h-full w-full object-contain"
+                      />
+                    ) : (
+                      partner.monogram
+                    )}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">

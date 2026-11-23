@@ -18,6 +18,7 @@ export interface PartnerItem {
   tier: "sponsor" | "parent" | "campus" | "industry";
   description: LocalizedText;
   monogram: string;
+  logoSrc?: string;
   url?: string;
 }
 
@@ -49,6 +50,7 @@ export const PARTNERS: PartnerItem[] = [
     name: "Extreme Networks",
     tier: "sponsor",
     monogram: "EXT",
+    logoSrc: "/images/extreme-networks-mark.png",
     url: "https://www.extremenetworks.com/",
     description: {
       en: "Official corporate sponsor of KSEA UW—global leader in cloud-driven AI networking solutions supporting our 2026–2027 student programs.",
