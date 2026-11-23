@@ -1,165 +1,227 @@
 import type { LocalizedText } from "./site";
 
-export type CommitteeId = "executive" | "events" | "external" | "tech";
+export type CommitteeId = "executive" | "pr" | "planning" | "design";
 
 export interface Officer {
   id: string;
   name: string;
-  koreanName: string;
+  koreanName?: string;
   role: LocalizedText;
+  isLead?: boolean;
   committee: CommitteeId;
   major: LocalizedText;
   classYear: string;
-  bio: LocalizedText;
+  bio?: LocalizedText;
   initials: string;
   accentColor: string;
-  linkedin: string;
-  email: string;
+  linkedin?: string;
+  email?: string;
 }
 
 export const COMMITTEES: { id: "all" | CommitteeId; label: LocalizedText }[] = [
   { id: "all", label: { en: "All Officers", ko: "전체 임원진" } },
   { id: "executive", label: { en: "Executive Board", ko: "회장단" } },
-  { id: "events", label: { en: "Events & Career", ko: "행사 · 커리어" } },
-  { id: "external", label: { en: "External & Finance", ko: "대외협력 · 재무" } },
-  { id: "tech", label: { en: "Tech & Media", ko: "테크 · 미디어" } },
+  { id: "pr", label: { en: "PR Team", ko: "PR팀" } },
+  { id: "planning", label: { en: "Planning Team", ko: "기획팀" } },
+  { id: "design", label: { en: "Design & Marketing", ko: "디자인·마케팅팀" } },
+];
+
+export const COMMITTEE_GROUPS: { id: CommitteeId; label: LocalizedText }[] = [
+  { id: "executive", label: { en: "Executive Board", ko: "회장단 (Executive Board)" } },
+  { id: "pr", label: { en: "PR Team", ko: "PR팀 (Public Relations)" } },
+  { id: "planning", label: { en: "Planning Team", ko: "기획팀 (Events & Planning)" } },
+  {
+    id: "design",
+    label: { en: "Design & Marketing Team", ko: "디자인·마케팅팀 (Design & Marketing)" },
+  },
 ];
 
 export const OFFICERS: Officer[] = [
+  // ==========================================
+  // EXECUTIVE BOARD (회장단)
+  // ==========================================
+  {
+    id: "hanbyul-kang",
+    name: "Hanbyul Kang",
+    role: { en: "President", ko: "회장 (President)" },
+    isLead: true,
+    committee: "executive",
+    major: { en: "Computer Science", ko: "컴퓨터공학 (CS)" },
+    classYear: "Class of 2027",
+    initials: "HK",
+    accentColor: "#4B2E83",
+  },
+  {
+    id: "jung-lee",
+    name: "Jung Lee",
+    role: { en: "Vice President", ko: "부회장 (Vice President)" },
+    isLead: true,
+    committee: "executive",
+    major: { en: "Mathematics", ko: "수학 (Mathematics)" },
+    classYear: "Class of 2027",
+    initials: "JL",
+    accentColor: "#5C3A9C",
+  },
+  {
+    id: "ann-yun",
+    name: "Ann Yun",
+    role: { en: "Secretary", ko: "서기 (Secretary)" },
+    isLead: true,
+    committee: "executive",
+    major: { en: "Biology", ko: "생물학 (Biology)" },
+    classYear: "Class of 2029",
+    initials: "AY",
+    accentColor: "#3D246C",
+  },
+
+  // ==========================================
+  // PR TEAM (PR팀)
+  // ==========================================
+  {
+    id: "jennifer-yoo",
+    name: "Jennifer Yoo",
+    role: { en: "PR Team Lead", ko: "PR팀장" },
+    isLead: true,
+    committee: "pr",
+    major: {
+      en: "Medical Anthropology & Global Health",
+      ko: "의료인류학 · 글로벌헬스",
+    },
+    classYear: "Class of 2027",
+    initials: "JY",
+    accentColor: "#7C582B",
+  },
+  {
+    id: "eunbin-jang",
+    name: "Eunbin Jang",
+    role: { en: "PR Officer", ko: "PR팀원" },
+    committee: "pr",
+    major: { en: "Accounting & Finance", ko: "회계 · 재무 (Accounting/Finance)" },
+    classYear: "Class of 2028",
+    initials: "EJ",
+    accentColor: "#8A6738",
+  },
+  {
+    id: "changyun-heo",
+    name: "Changyun Heo",
+    role: { en: "PR Officer", ko: "PR팀원" },
+    committee: "pr",
+    major: { en: "Electrical & Computer Engineering (ECE)", ko: "전기컴퓨터공학 (ECE)" },
+    classYear: "Class of 2028",
+    initials: "CH",
+    accentColor: "#6B5230",
+  },
+  {
+    id: "hazel-choi",
+    name: "Hazel Choi",
+    role: { en: "PR Officer", ko: "PR팀원" },
+    committee: "pr",
+    major: { en: "Pre-Sciences", ko: "Pre-Sciences" },
+    classYear: "Class of 2028",
+    initials: "HC",
+    accentColor: "#947141",
+  },
+  {
+    id: "doeun-kim",
+    name: "Doeun Kim",
+    role: { en: "PR Officer", ko: "PR팀원" },
+    committee: "pr",
+    major: { en: "Computer Science", ko: "컴퓨터공학 (CS)" },
+    classYear: "Class of 2028",
+    initials: "DK",
+    accentColor: "#5E4524",
+  },
+
+  // ==========================================
+  // PLANNING TEAM (기획팀)
+  // ==========================================
+  {
+    id: "jimin-chae",
+    name: "Jimin Chae",
+    role: { en: "Planning Team Lead", ko: "기획팀장" },
+    isLead: true,
+    committee: "planning",
+    major: { en: "Environmental Public Health", ko: "환경보건학 (Environmental Public Health)" },
+    classYear: "Class of 2028",
+    initials: "JC",
+    accentColor: "#2C5E50",
+  },
+  {
+    id: "hajin-lee",
+    name: "Hajin Lee",
+    role: { en: "Planning Officer", ko: "기획팀원" },
+    committee: "planning",
+    major: { en: "Biochemistry", ko: "생화학 (Biochemistry)" },
+    classYear: "Class of 2030",
+    initials: "HL",
+    accentColor: "#367060",
+  },
   {
     id: "jihoon-park",
     name: "Jihoon Park",
-    koreanName: "박지훈",
-    role: { en: "President", ko: "회장 (President)" },
-    committee: "executive",
-    major: { en: "Computer Science (BS/MS)", ko: "컴퓨터공학 (학석사 연계)" },
-    classYear: "Class of 2027",
-    bio: {
-      en: "Leading chapter strategy and Seattle KSEA partnerships. Researching distributed ML systems at the Paul G. Allen School.",
-      ko: "KSEA UW 전체 비전 수립과 시애틀 지부 협력을 총괄하고 있습니다. Allen School에서 분산 머신러닝 시스템을 연구 중입니다.",
+    role: { en: "Planning Officer", ko: "기획팀원" },
+    committee: "planning",
+    major: {
+      en: "Applied & Computational Math Sciences (ACMS)",
+      ko: "응용계산수학 (ACMS)",
     },
+    classYear: "Class of 2030",
     initials: "JP",
-    accentColor: "#4B2E83",
-    linkedin: "https://linkedin.com",
-    email: "president.kseauw@uw.edu",
+    accentColor: "#244D42",
   },
   {
-    id: "seoyeon-kim",
-    name: "Seoyeon Kim",
-    koreanName: "김서연",
-    role: { en: "Vice President", ko: "부회장 (Vice President)" },
-    committee: "executive",
-    major: { en: "Bioengineering", ko: "바이오엔지니어링" },
-    classYear: "Class of 2027",
-    bio: {
-      en: "Overseeing cross-disciplinary STEM programming and pre-grad mentorship across Life Sciences and Engineering.",
-      ko: "생명과학·공학 전공 간 융합 프로그램과 학부 연구생 멘토링 트랙을 총괄하고 있습니다.",
-    },
-    initials: "SK",
-    accentColor: "#6B3FA0",
-    linkedin: "https://linkedin.com",
-    email: "vp.kseauw@uw.edu",
+    id: "chaeyun-kim",
+    name: "Chaeyun Kim",
+    role: { en: "Planning Officer", ko: "기획팀원" },
+    committee: "planning",
+    major: { en: "Materials Science & Engineering", ko: "재료공학 (MSE)" },
+    classYear: "Class of 2028",
+    initials: "CK",
+    accentColor: "#3C6E63",
   },
   {
-    id: "daniel-choi",
-    name: "Daniel Choi",
-    koreanName: "최다니엘",
-    role: { en: "Director of Career & Events", ko: "커리어·행사 디렉터" },
-    committee: "events",
-    major: { en: "Electrical & Computer Engineering", ko: "전기컴퓨터공학" },
+    id: "seonho-lee",
+    name: "Seonho Lee",
+    role: { en: "Planning Officer", ko: "기획팀원" },
+    committee: "planning",
+    major: { en: "Engineering", ko: "공학 (Engineering)" },
+    classYear: "Class of 2030",
+    initials: "SL",
+    accentColor: "#1F443A",
+  },
+
+  // ==========================================
+  // DESIGN & MARKETING TEAM (디자인/마케팅팀)
+  // ==========================================
+  {
+    id: "haize-ha",
+    name: "Haize Ha",
+    role: { en: "Design & Marketing Lead", ko: "디자인·마케팅팀장" },
+    isLead: true,
+    committee: "design",
+    major: { en: "Human Centered Design & Engineering (HCDE)", ko: "인간중심설계공학 (HCDE)" },
     classYear: "Class of 2027",
-    bio: {
-      en: "Curating quarterly tech talks, hardware workshops, and our flagship Annual Seattle STEM Career Symposium.",
-      ko: "분기별 테크 토크, 하드웨어 워크숍, 그리고 연례 시애틀 STEM 커리어 심포지엄을 기획합니다.",
-    },
-    initials: "DC",
+    initials: "HH",
     accentColor: "#31497A",
-    linkedin: "https://linkedin.com",
-    email: "events.kseauw@uw.edu",
   },
   {
-    id: "hannah-lee",
-    name: "Hannah Lee",
-    koreanName: "이한나",
-    role: { en: "Director of External Relations", ko: "대외협력 디렉터" },
-    committee: "external",
-    major: { en: "Informatics & Data Science", ko: "인포매틱스 · 데이터사이언스" },
+    id: "raena-seong",
+    name: "Raena Seong",
+    role: { en: "Design & Marketing Officer", ko: "디자인·마케팅팀원" },
+    committee: "design",
+    major: { en: "Chemistry & Civil Engineering", ko: "화학 · 토목공학 (Chem/CivilE)" },
     classYear: "Class of 2028",
-    bio: {
-      en: "Connecting UW students with Korean-American engineers, founders, and corporate sponsors throughout the Puget Sound.",
-      ko: "시애틀 지역 한인 엔지니어, 스타트업 파운더, 후원 기업과의 파트너십을 구축하고 있습니다.",
-    },
-    initials: "HL",
-    accentColor: "#7C582B",
-    linkedin: "https://linkedin.com",
-    email: "external.kseauw@uw.edu",
+    initials: "RS",
+    accentColor: "#405C94",
   },
   {
-    id: "minjun-jung",
-    name: "Minjun Jung",
-    koreanName: "정민준",
-    role: { en: "Treasurer & Operations", ko: "재무 · 운영 디렉터" },
-    committee: "external",
-    major: { en: "Applied & Computational Math Sciences", ko: "응용계산수학 (ACMS)" },
-    classYear: "Class of 2028",
-    bio: {
-      en: "Managing RSO funding, KSEA chapter grants, event logistics, and scholarship information sessions.",
-      ko: "교내 RSO 예산, KSEA 지부 그랜트 운영, 행사 로지스틱스 및 장학금 안내를 담당합니다.",
-    },
-    initials: "MJ",
-    accentColor: "#2C5E50",
-    linkedin: "https://linkedin.com",
-    email: "finance.kseauw@uw.edu",
-  },
-  {
-    id: "yujin-song",
-    name: "Yujin Song",
-    koreanName: "송유진",
-    role: { en: "Director of Academic Programs", ko: "학술 프로그램 디렉터" },
-    committee: "events",
-    major: { en: "Mechanical Engineering (PhD Student)", ko: "기계공학 (박사과정)" },
-    classYear: "PhD Candidate",
-    bio: {
-      en: "Bridging UW undergraduate and graduate researchers through lab tours, grad school Q&As, and NWRC poster prep.",
-      ko: "학부생과 대학원 연구자를 잇는 랩 투어, 대학원 진학 Q&A, NWRC 포스터 발표 준비를 이끕니다.",
-    },
-    initials: "YS",
-    accentColor: "#5E2B63",
-    linkedin: "https://linkedin.com",
-    email: "academic.kseauw@uw.edu",
-  },
-  {
-    id: "eric-han",
-    name: "Eric Han",
-    koreanName: "한에릭",
-    role: { en: "Tech & Web Lead", ko: "테크 · 웹 리드" },
-    committee: "tech",
-    major: { en: "Computer Engineering", ko: "컴퓨터공학" },
-    classYear: "Class of 2028",
-    bio: {
-      en: "Building KSEA UW digital infrastructure, member tools, and leading the Winter STEM Hackathon technical track.",
-      ko: "KSEA UW 웹사이트와 멤버십 툴을 개발하고 겨울 학기 STEM 해커톤 테크 트랙을 운영합니다.",
-    },
-    initials: "EH",
-    accentColor: "#332B66",
-    linkedin: "https://linkedin.com",
-    email: "tech.kseauw@uw.edu",
-  },
-  {
-    id: "chloe-yoon",
-    name: "Chloe Yoon",
-    koreanName: "윤클로이",
-    role: { en: "Creative & Media Lead", ko: "디자인 · 미디어 리드" },
-    committee: "tech",
-    major: { en: "Human Centered Design & Engineering", ko: "인간중심설계공학 (HCDE)" },
-    classYear: "Class of 2028",
-    bio: {
-      en: "Shaping KSEA UW brand storytelling, event photography, and bilingual social campaigns for the UW community.",
-      ko: "KSEA UW의 브랜드 디자인, 행사 사진 아카이빙, 한영 소셜 미디어 콘텐츠를 제작합니다.",
-    },
-    initials: "CY",
-    accentColor: "#8A4F5C",
-    linkedin: "https://linkedin.com",
-    email: "media.kseauw@uw.edu",
+    id: "kevin-kuk",
+    name: "Kevin Kuk",
+    role: { en: "Design & Marketing Officer", ko: "디자인·마케팅팀원" },
+    committee: "design",
+    major: { en: "Computer Science", ko: "컴퓨터공학 (CS)" },
+    classYear: "Class of 2027",
+    initials: "KK",
+    accentColor: "#253961",
   },
 ];

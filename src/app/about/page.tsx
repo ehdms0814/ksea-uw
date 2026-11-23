@@ -4,17 +4,106 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ExternalLink, Mail } from "lucide-react";
 import { TIMELINE_MILESTONES, SITE_INFO } from "@/data/site";
-import { COMMITTEES, OFFICERS, type CommitteeId } from "@/data/officers";
+import {
+  COMMITTEE_GROUPS,
+  COMMITTEES,
+  OFFICERS,
+  type CommitteeId,
+  type Officer,
+} from "@/data/officers";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutPage() {
   const { locale, t } = useLanguage();
   const [activeCommittee, setActiveCommittee] = useState<"all" | CommitteeId>("all");
 
-  const filteredOfficers =
+  const visibleGroups =
     activeCommittee === "all"
-      ? OFFICERS
-      : OFFICERS.filter((officer) => officer.committee === activeCommittee);
+      ? COMMITTEE_GROUPS.map((group) => ({
+          ...group,
+          officers: OFFICERS.filter((officer) => officer.committee === group.id),
+        }))
+      : COMMITTEE_GROUPS.filter((group) => group.id === activeCommittee).map((group) => ({
+          ...group,
+          officers: OFFICERS.filter((officer) => officer.committee === group.id),
+        }));
+
+  const renderOfficerCard = (officer: Officer) => (
+    <article
+      key={officer.id}
+      className="flex flex-col rounded-2xl border border-stone-border bg-surface p-5 shadow-xs transition-all hover:-translate-y-0.5 hover:border-husky/35 hover:shadow-md"
+    >
+      <div className="flex items-center gap-3.5">
+        <div
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl font-mono text-sm font-bold text-white shadow-xs"
+          style={{ backgroundColor: officer.accentColor }}
+          aria-hidden="true"
+        >
+          {officer.initials}
+        </div>
+        <div className="min-w-0">
+          <h4 className="truncate text-base font-bold text-ink">{officer.name}</h4>
+          <p className="font-mono text-xs text-ink-muted">
+            {officer.koreanName
+              ? `${officer.koreanName} · ${officer.classYear}`
+              : officer.classYear}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span
+          className={
+            officer.isLead
+              ? "inline-block rounded-full bg-husky px-3 py-1 text-xs font-semibold text-white"
+              : "inline-block rounded-full bg-husky/10 px-3 py-1 text-xs font-semibold text-husky"
+          }
+        >
+          {t(officer.role)}
+        </span>
+      </div>
+
+      <p className="mt-3 text-xs font-medium leading-relaxed text-ink-secondary">
+        {t(officer.major)}
+      </p>
+
+      {officer.bio && (
+        <p className="mt-2.5 flex-1 text-sm leading-relaxed text-ink-secondary">
+          {t(officer.bio)}
+        </p>
+      )}
+
+      {(officer.linkedin || officer.email) && (
+        <div className="mt-4 flex items-center gap-3 border-t border-stone-border pt-3.5 text-xs font-semibold">
+          {officer.linkedin && (
+            <a
+              href={officer.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-ink-secondary transition-colors hover:text-husky"
+            >
+              <span>LinkedIn</span>
+              <ExternalLink className="h-3 w-3" aria-hidden="true" />
+            </a>
+          )}
+          {officer.linkedin && officer.email && (
+            <span className="text-stone-border" aria-hidden="true">
+              |
+            </span>
+          )}
+          {officer.email && (
+            <a
+              href={`mailto:${officer.email}`}
+              className="inline-flex items-center gap-1 text-ink-secondary transition-colors hover:text-husky"
+            >
+              <Mail className="h-3 w-3" aria-hidden="true" />
+              <span>{locale === "en" ? "Email" : "이메일"}</span>
+            </a>
+          )}
+        </div>
+      )}
+    </article>
+  );
 
   return (
     <div>
@@ -136,6 +225,10 @@ export default function AboutPage() {
           >
             {COMMITTEES.map((committee) => {
               const selected = activeCommittee === committee.id;
+              const count =
+                committee.id === "all"
+                  ? OFFICERS.length
+                  : OFFICERS.filter((o) => o.committee === committee.id).length;
               return (
                 <button
                   key={committee.id}
@@ -148,72 +241,29 @@ export default function AboutPage() {
                       : "rounded-full border border-stone-border bg-surface px-4 py-2 text-xs font-medium text-ink-secondary transition-colors hover:border-husky/40 hover:text-ink"
                   }
                 >
-                  {t(committee.label)}
+                  {t(committee.label)} ({count})
                 </button>
               );
             })}
           </div>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredOfficers.map((officer) => (
-            <article
-              key={officer.id}
-              className="flex flex-col rounded-2xl border border-stone-border bg-surface p-6 shadow-xs transition-all hover:-translate-y-0.5 hover:border-husky/35 hover:shadow-md"
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl font-mono text-base font-bold text-white shadow-sm"
-                  style={{ backgroundColor: officer.accentColor }}
-                  aria-hidden="true"
-                >
-                  {officer.initials}
-                </div>
-                <div className="min-w-0">
-                  <h3 className="truncate text-base font-bold text-ink">
-                    {officer.name}
-                  </h3>
-                  <p className="text-xs font-medium text-ink-muted">
-                    {officer.koreanName} · {officer.classYear}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <span className="inline-block rounded-full bg-husky/10 px-3 py-1 text-xs font-semibold text-husky">
-                  {t(officer.role)}
+        <div className="mt-10 space-y-12">
+          {visibleGroups.map((group) => (
+            <div key={group.id}>
+              <div className="flex items-baseline justify-between border-b border-stone-border pb-3">
+                <h3 className="text-lg font-bold tracking-tight text-ink">
+                  {t(group.label)}
+                </h3>
+                <span className="font-mono text-xs font-semibold text-gold-deep">
+                  {group.officers.length}{" "}
+                  {locale === "en" ? "members" : "명"}
                 </span>
-                <p className="mt-2 font-mono text-[11px] text-gold-deep">
-                  {t(officer.major)}
-                </p>
               </div>
-
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-secondary">
-                {t(officer.bio)}
-              </p>
-
-              <div className="mt-5 flex items-center gap-3 border-t border-stone-border pt-4 text-xs font-semibold">
-                <a
-                  href={officer.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-ink-secondary transition-colors hover:text-husky"
-                >
-                  <span>LinkedIn</span>
-                  <ExternalLink className="h-3 w-3" aria-hidden="true" />
-                </a>
-                <span className="text-stone-border" aria-hidden="true">
-                  |
-                </span>
-                <a
-                  href={`mailto:${officer.email}`}
-                  className="inline-flex items-center gap-1 text-ink-secondary transition-colors hover:text-husky"
-                >
-                  <Mail className="h-3 w-3" aria-hidden="true" />
-                  <span>{locale === "en" ? "Email" : "이메일"}</span>
-                </a>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {group.officers.map(renderOfficerCard)}
               </div>
-            </article>
+            </div>
           ))}
         </div>
 
