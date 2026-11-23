@@ -87,7 +87,7 @@ export const OFFICERS: Officer[] = [
       en: "Medical Anthropology & Global Health",
       ko: "의료인류학 · 글로벌헬스",
     },
-    classYear: "Class of 2027",
+    classYear: "Class of 2028",
     initials: "JY",
     accentColor: "#7C582B",
   },
