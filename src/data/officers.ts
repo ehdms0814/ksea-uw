@@ -205,13 +205,13 @@ export const OFFICERS: Officer[] = [
     accentColor: "#31497A",
   },
   {
-    id: "raena-seong",
-    name: "Raena Seong",
+    id: "lena-seong",
+    name: "Lena Seong",
     role: { en: "Design & Marketing Officer", ko: "디자인·마케팅팀원" },
     committee: "design",
-    major: { en: "Chemistry & Civil Engineering", ko: "화학 · 토목공학 (Chem/CivilE)" },
+    major: { en: "Chemistry", ko: "화학 (Chemistry)" },
     classYear: "Class of 2028",
-    initials: "RS",
+    initials: "LS",
     accentColor: "#405C94",
   },
   {
