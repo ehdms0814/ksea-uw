@@ -141,8 +141,11 @@ export const OFFICERS: Officer[] = [
     role: { en: "Planning Team Lead", ko: "기획팀장" },
     isLead: true,
     committee: "planning",
-    major: { en: "Environmental Public Health", ko: "환경보건학 (Environmental Public Health)" },
-    classYear: "Class of 2028",
+    major: {
+      en: "Environmental Public Health & Pharmaceutical Sciences",
+      ko: "환경보건학 · 제약과학 (Environmental Public Health & Pharmaceutical Sciences)",
+    },
+    classYear: "Class of 2029",
     initials: "JC",
     accentColor: "#2C5E50",
   },
